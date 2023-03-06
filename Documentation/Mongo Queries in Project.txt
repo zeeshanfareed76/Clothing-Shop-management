@@ -1,0 +1,56 @@
+In Signup Module
+db.customer.insert({"cnic": 56789, "first_name": "Huzaifa", "last_name": "Tariq", "postal_code": "560", "address": "Karachi", "contact_number": "03456789098", "email": "huzaifa@gmail.com", "gender": "Male", "password": "56789", "_id": {"$oid": "61c55e7efa660b3e2558fe77"}})
+
+In Login Module
+db.customer.find({"cnic":56789},{"password":56789})
+
+In Caps Module
+db.products.find({"category_name": "caps"})
+db.products.find({"brands":"Puma"},{"category_name": "caps"})
+db.products.find({"caps_id":1})
+
+In Jeans Module
+db.products.find({"category_name": "jeans"})
+db.products.find({"brands":"Wrangler"},{"category_name": "jeans"})
+db.products.find({"jeans_id":52})
+
+In Shirts Module
+db.products.find({"category_name": "shirts"})
+db.products.find({"brands":"PeterEngland"},{"category_name": "shirts"})
+db.products.find({"shirt":104})
+
+In Trousers Module
+db.products.find({"category_name": "trousers"})
+db.products.find({"brands":"Invictus"},{"category_name": "trousers"})
+db.products.find({"trousers_id":204})
+
+In Watches Module
+db.products.find({"category_name": "watches"})
+db.products.find({"brands":"Benson"},{"category_name": "watches"})
+db.products.find({"watch_id":253})
+
+In Shoes Module
+db.products.find({"category_name": "shoes"})
+db.products.find({"brands":"Nike"},{"category_name": "shoes"})
+db.products.find({"shoes_id":153})
+
+In Cart Module
+db.cart.find({"cnic": 56789})
+
+In Payment Module
+db.payment.insert({"amount": 6300, "cnic": 56789, "credit_card": 113377})
+
+In Receipt Module
+db.cart.count({"cnic":56789})
+db.reciept.insert({"cnic": 56789, "no_of_item": 3, "total_price":6300})
+db.cart.aggregate({ $match: { "cnic": 56789}},{ $group: { _id : null, sum : { $sum: "$price" } } });
+db.delivery.insert({"cnic":56789},{"delivery_date":"12-12-2021"},{"status":"pending"})
+db.customer.find({"cnic":56789})
+
+In Delivery Module
+db.delivery.find({"cnic":56789},{"status":"pending"})
+db.delivery.update({"cnic": 56789, "status": "pending"},{"cnic": 56789, "status": "delivered"})
+.remove in reciept
+
+db.cart.aggregate({ $match: { "cnic": 56789}},{ $group: { _id : null, sum : { $sum: "$price" } } });
+db.payment.aggregate({ $match: { "cnic": 8080}},{ $group: { _id : "$cnic", maxpurchase : { $max: "$amount" } } });

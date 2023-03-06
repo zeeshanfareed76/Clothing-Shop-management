@@ -1,0 +1,74 @@
+In Signup Module
+Insert into CUSTOMER values (1234,'amir','amir',1234,'islamabad',3123456789,'amir@gmail.com','Male');
+Insert into LOGIN (CNIC,PASSWORD) values (1234,'1234');
+
+In Login Module
+select cnic, password from login where cnic =1234 and password=1234;
+
+In Caps Module
+select * from caps order by caps_ID ASC;
+select caps_ID,capssize,color,brands,price,dsign from caps where brands ='Puma';
+select price from Caps where Caps_id=1;
+
+In Jeans Module
+select * from jeans order by jeans_ID ASC;
+select Jeans_ID,Jeanssize,color,brands,price,design from jeans where brands = 'Wrangler';
+select price from Jeans where Jeans_id =52;
+
+In Shirts Module
+SELECT * FROM shirts ORDER BY shirt_id ASC;
+select Shirt_ID,Shirtsize,color,brands,price,design from Shirts where brands = 'PeterEngland';
+select price from Shirts where Shirt_id =104;
+
+In Shoes Module
+select * from shoes order by shoes_ID ASC;
+select shoes_ID,shoe_size,color,brand,price,design from shoes where brand = 'Nike';
+select price from Shoes where Shoes_id = 153;
+
+In Trousers Module
+select * from trousers order by trousers_ID ASC;
+
+select Trousers_ID,Trousers_size,color,brand,price,design from Trousers where brand = 'Invictus';
+select price from Trousers where Trousers_id =204;
+
+In Watches Module
+select * from watches order by watch_ID ASC;
+select Watch_ID,color,dial,brand,price from watches where brand = 'Benson';
+select price from Watches where Watch_id = 253;
+
+In Cart Module
+select * from cart where cnic=1234;
+select SUM(price) from cart where cnic=1234 group by cnic;
+insert into cart values(1234,'Caps',1,3500);
+
+In Payment Module
+insert into payment(amount, cnic, credit_card) values(3500,1234,1234);
+select sum(price) from cart where cnic=1234;
+
+In Receipt Module
+select count(cnic) from cart where cnic=1234;
+Insert into Reciept values(1234,1,3500);
+select * from cart where cnic=1234;
+select customer.Cnic, customer.first_name,customer.Address,customer.Contact_number,reciept.no_of_item,reciept.Total_price from customer inner join Reciept on (reciept.cnic=customer.cnic) where reciept.cnic=1234 and  reciept.total_price=3500;
+delete from cart where cnic =1234;
+
+In Delivery Module
+select contact_number from Customer where cnic=1234 ;
+Insert into Delivery values (1234,'30-12-2021','pending');
+Update Delivery Set Status ='Delivered' where cnic=1234;
+select customer.Cnic, customer.first_name,customer.Address,customer.Contact_number,delivery.delivery_date,delivery.status from customer inner join Delivery on (Delivery.cnic=customer.cnic) where Delivery.cnic=1234 and delivery.status='pending';
+
+select customer.Cnic, customer.first_name,customer.Address,customer.Contact_number,reciept.no_of_item,reciept.Total_price from customer inner join Reciept on (reciept.cnic=customer.cnic) where reciept.cnic=1234 and  reciept.total_price=3500;
+select customer.Cnic, customer.first_name,customer.Address,customer.Contact_number,delivery.delivery_date,delivery.status from customer inner join Delivery on (Delivery.cnic=customer.cnic) where Delivery.cnic=1234 and delivery.status='pending';
+
+Drop view Orders;
+create or replace view Orders as
+select customer.cnic, customer.first_name, payment.amount,delivery.delivery_date
+from customer
+inner join payment on (customer.cnic=payment.cnic)
+inner join delivery on (delivery.cnic=customer.cnic)
+;
+select * from orders;
+select cnic, max(amount)
+from payment
+group by cnic;
